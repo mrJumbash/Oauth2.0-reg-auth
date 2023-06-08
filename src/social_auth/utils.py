@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate
 from accounts.models import User
-from core.settings.env_reader import env
 from accounts.services import UserService
 import random
 from rest_framework.exceptions import AuthenticationFailed
@@ -14,13 +13,15 @@ def generate_username(name):
     else:
         random_username = username + str(random.randint(0, 1000))
         return generate_username(random_username)
-    
+
+
 def get_username(name):
     username = "".join(name.split(" ")).lower()
     if User.objects.filter(username=username).exists():
         return username
     else:
-        raise ValueError('Username does not exist')
+        raise ValueError("Username does not exist")
+
 
 def register_social_user(provider, user_id, email, name):
     filtered_user_by_email = User.objects.filter(email=email)
@@ -38,13 +39,10 @@ def register_social_user(provider, user_id, email, name):
         }
 
     else:
-        username = generate_username(name),
-        user = {
-            "username": username,
-            "email": email,
-            "password": env("GOOGLE_CLIENT_SECRET"),
-        }
-        user = User.objects.create_user(**user)
+        username = generate_username(name)
+        user = User.objects.create_user(
+            username=username, email=email, password=env("GOOGLE_CLIENT_SECRET")
+        )
         user.is_verified = True
         user.auth_provider = provider
         user.role = 2
