@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.documentation import include_docs_urls
+from common.views import GlobalSeacrh
 
 
 urlpatterns = [
@@ -10,6 +11,8 @@ urlpatterns = [
     path("api/v1/", include("accounts.urls")),
     path("api/v1/", include("service.urls")),
     path("social_auth/", include("social_auth.urls")),
+    
+    path('search/', GlobalSeacrh.as_view())
 ]
 
 if settings.DEBUG:

@@ -17,9 +17,9 @@ class User(AbstractUser, BaseModel, PermissionsMixin):
         max_length=255, blank=True, null=True, default=AUTH_PROVIDERS.get("email")
     )
 
-    USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["username"]
-
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ['username']
+    
     objects = UserManager()
 
     def __str__(self):

@@ -24,6 +24,8 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_filters",
+    'drf_multiple_model'
+
 ]
 
 THEME_APPS = [
@@ -112,6 +114,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 from .thems import *
 
