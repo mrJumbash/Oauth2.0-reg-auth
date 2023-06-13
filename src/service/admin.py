@@ -12,9 +12,9 @@ class CategoryAdmin(admin.ModelAdmin):
     
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "description", "price", "id", 'category']
+    list_display = ["title", "description", "price", "id", 'category', 'discount_percentage']
     readonly_fields = ["created_at", "id"]
-    fields = ["title", "description", "price", "created_at", "owner", 'category']
+    fields = ["title", "description", "price", "created_at", "owner", 'category', 'discount_percentage']
     
     raw_id_fields = ['category']
     

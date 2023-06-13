@@ -1,17 +1,10 @@
-from itertools import chain
 from rest_framework import generics
-from rest_framework.response import Response
-from service.serializers import ProductSerializer, GlobalSearchSerializer
-from service.models import Product, Category
-from accounts.models import User
+from service.serializers import ProductSerializer
 from service.permissions import IsTenantAndAdminOrReadOnly, IsOwnerOrReadOnly
-from django.db.models import Q
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
-
-
-
-
+from service.models import Product
+from rest_framework.views import APIView
+from accounts.models import User
+from rest_framework.response import Response
 
 
 class ProductAPI(generics.ListCreateAPIView):
@@ -25,3 +18,4 @@ class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     lookup_field = "id"
     permission_classes = [IsOwnerOrReadOnly]
+
