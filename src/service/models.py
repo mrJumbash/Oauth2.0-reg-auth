@@ -55,22 +55,21 @@ class Review(BaseModel):
     )
 
 
-'''ViewHistory & Preferences'''
+"""ViewHistory & Preferences"""
+
 
 class Preferences(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    
+
     def __str__(self) -> str:
         return str(self.user) + str(self.product)
+
 
 class ViewHistory(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-       
+
     def __str__(self) -> str:
-        return str(self.user) + str(self.product) 
-    
-    
-    
+        return str(self.user) + str(self.product)
