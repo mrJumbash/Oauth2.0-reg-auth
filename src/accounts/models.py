@@ -18,8 +18,8 @@ class User(AbstractUser, BaseModel, PermissionsMixin):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['username']
-    
+    REQUIRED_FIELDS = ["username"]
+
     objects = UserManager()
 
     def __str__(self):

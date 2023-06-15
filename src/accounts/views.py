@@ -120,10 +120,10 @@ class LoginAPI(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        username = serializer.validated_data["username"]
+        email = serializer.validated_data["email"]
         password = serializer.validated_data["password"]
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
         if user:
             return Response(data=UserService.tokens(user=user))
 

@@ -11,8 +11,7 @@ urlpatterns = [
     path("api/v1/", include("accounts.urls")),
     path("api/v1/", include("service.urls")),
     path("social_auth/", include("social_auth.urls")),
-    
-    path('search/', GlobalSeacrh.as_view())
+    path("search/", GlobalSeacrh.as_view()),
 ]
 
 if settings.DEBUG:

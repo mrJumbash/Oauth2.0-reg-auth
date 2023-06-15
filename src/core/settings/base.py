@@ -6,6 +6,9 @@ from .env_reader import env
 # BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# PROJECT_ROOT
+PROJECT_ROOT = Path(__file__).resolve().parent.parent 
+
 # Production
 PRODUCTION = env("PRODUCTION", default=False, cast=bool)
 
@@ -24,8 +27,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_filters",
-    'drf_multiple_model'
-
+    "drf_multiple_model",
 ]
 
 THEME_APPS = [
@@ -93,6 +95,7 @@ USE_TZ = True
 STATIC_URL = "/back_static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "back_static")
 
+
 # Media files
 MEDIA_URL = "/back_media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "back_media")
@@ -114,15 +117,15 @@ REST_FRAMEWORK = {
     ),
 }
 
-#email-sender
+# email-sender
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD =env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
-#celery
+# celery
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
@@ -132,6 +135,15 @@ if not PRODUCTION:
     from .local import *
 else:
     from .production import *
+
+# cache-redis
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {"db": "1"},
+    }
+}
 
 
 if DEBUG:
